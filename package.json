@@ -1,0 +1,21 @@
+{
+  "name": "assistente-ia-backend",
+  "version": "1.0.0",
+  "description": "Backend para chamar OpenAI com ChatGPT",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2",
+    "openai": "^5.11.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

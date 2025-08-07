@@ -1,0 +1,135 @@
+/* style.css */
+
+/* Paleta de cores */
+:root {
+  --color-bg: #f9fafb;
+  --color-container: #ffffff;
+  --color-primary: #4f46e5;
+  --color-primary-dark: #4338ca;
+  --color-text: #1f2937;
+  --color-label: #6b7280;
+  --radius: 12px;
+  --transition: 0.3s ease;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --font: 'Inter', sans-serif;
+}
+
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  color: var(--color-text);
+}
+
+/* Container principal */
+.container {
+  background: var(--color-container);
+  padding: 40px;
+  border-radius: var(--radius);
+  max-width: 600px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Título */
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+/* Labels */
+.label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+/* Campo de texto */
+#pergunta {
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+#pergunta:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Botão */
+button {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.2);
+}
+
+/* Resposta */
+.resposta {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  border-radius: var(--radius);
+  min-height: 60px;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: var(--transition);
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px;
+  }
+
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+  }
+}
