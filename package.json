@@ -13,9 +13,18 @@
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
     "node-fetch": "^3.3.2",
-    "openai": "^5.11.0"
+    "openai": "^5.12.2"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KFalcao/assistente-ia.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KFalcao/assistente-ia/issues"
+  },
+  "homepage": "https://github.com/KFalcao/assistente-ia#readme"
 }

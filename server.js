@@ -1,44 +1,41 @@
-require("dotenv").config(); // carrega o .env
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import OpenAI from "openai";
 
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
-
-console.log("Chave carregada do .env:", process.env.OPENAI_API_KEY);
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
-
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("./public")); 
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+let ultimaChamada = 0;
 
 app.post("/api/pergunta", async (req, res) => {
-  const { pergunta } = req.body;
+  const agora = Date.now();
+  if (agora - ultimaChamada < 5000) {
+    return res.status(429).json({ erro: "Espere 5 segundos antes de perguntar novamente." });
+  }
+  ultimaChamada = agora;
 
   try {
-    const resposta = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: pergunta }],
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-      }
-    );
+    const resposta = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: req.body.pergunta }],
+      temperature: 0.7
+    });
 
-    res.json({ resposta: resposta.data.choices[0].message.content });
+    res.json({ resposta: resposta.choices[0].message.content });
   } catch (error) {
-    console.error("Erro ao chamar OpenAI:", error.message);
-    res.status(500).json({ erro: "Erro ao conectar com a OpenAI." });
+    console.error(error);
+    res.status(500).json({ erro: "Erro ao processar a pergunta." });
   }
 });
 
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
